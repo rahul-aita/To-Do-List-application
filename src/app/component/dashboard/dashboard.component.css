@@ -8,3 +8,10 @@ time-picker {
     position:absolute;
     z-index : 99999999;
   }
+  
+
+  ::ng-deep.ngx-material-timepicker-toggle{
+       
+        margin-left: 11rem !important;
+        margin-top: -2.5rem !important; 
+      }

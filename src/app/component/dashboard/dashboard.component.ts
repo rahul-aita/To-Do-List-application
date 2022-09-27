@@ -20,6 +20,8 @@ export class DashboardComponent implements OnInit {
   editEndTime: string = '';
   subtractMinute:any=[]
   subtractMinute2:any=[]
+  valueDate:any;
+  fullDate:any
   // @ViewChild('toggleTimepicker')
   constructor(private crudService : CrudService) { }
 
@@ -30,6 +32,12 @@ export class DashboardComponent implements OnInit {
     this.addTaskValue = '';
     this.startTime = '';
      this.EndTime = '';
+     this.valueDate= new Date()
+     var date=this.valueDate.getDate()
+     var month=this.valueDate.getMonth()
+     var year=this.valueDate.getFullYear()
+this.fullDate=date+"/"+month+"/"+year
+  
     this.taskObj = new Task();
     this.taskArr = [];
     this.getAllTask();
@@ -39,7 +47,6 @@ export class DashboardComponent implements OnInit {
     this.crudService.getAllTask().subscribe(res => {
       this.taskArr = res;
       for(let i=0;i< this.taskArr.length;i++){
-        debugger
         this.subtractMinute.push(parseInt(this.taskArr[i].startTime))
         this.subtractMinute2.push(this.taskArr[i].endTime)
        
