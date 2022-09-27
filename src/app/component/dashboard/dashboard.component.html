@@ -1,56 +1,83 @@
 <div class="container-fluid bg-light">
-    <div class="container bg-light">
+  <div class="container bg-light">
 
-        <div class="row mt-4" style="height: 500px;">
-            <div class="col"></div>
-            <div class="col-md-6 bg-white shadow">
+    <div class="row mt-4" style="height: 500px">
+      <div class="col"></div>
+      <div class="col-md-6 bg-white shadow" style="  width: 100%;">
 
-                <div class="card bg-warning mt-4">
-                    <h4 class="text-white p-3 pt-2 pb-2">To Do App</h4>
-                </div>
-
-                <div class="shadow">
-                    <div class="input-group p-4">
-                        <input type="text" class="form-control" placeholder="Enter task " name="task" [(ngModel)]="addTaskValue">
-                        <button class="btn btn-outline-success" type="button" (click)="addTask()">+</button>
-                      </div>
-                </div>
-
-                <h4 class="text-primary mt-4">Tasks : </h4>
-
-                <div style="overflow-y: auto; height: 350px;">
-                    <div class="m-3" *ngFor="let task of taskArr">
-                        <div class="p-2 shadow border" id="tasks" >
-                            <div class="input-group row ps-3" >
-                                <div class="card col-md-10 border-0"> {{task.task_name}} </div>
-                                <button class="btn btn-outline-primary col me-2" data-bs-toggle="modal" type="button" data-bs-target="#exampleModal" (click)="call(task)" >e</button>
-                                <div class="btn btn-outline-danger col" (click)="deleteTask(task)" >X</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit Task</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="input-group p-4">
-                                <input type="text" class="form-control" placeholder="Enter task " name="task" [(ngModel)]="editTaskValue">
-                                <button class="btn btn-outline-success" type="button" data-bs-dismiss="modal" (click)="editTask()">Update</button>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col"></div>
-
+        <div class="card bg-warning mt-4">
+          <h4 class="text-white p-3 pt-2 pb-2">To Do App</h4>
         </div>
 
+        <div class="shadow">
+          <div class="input-group p-4">
+            <div class="toggle-example">
+                <input [ngxTimepicker]="toggleTimepicker" placeholder="startime" [disableClick]="true" readonly [(ngModel)]="startTime">
+                <ngx-material-timepicker-toggle [for]="toggleTimepicker"></ngx-material-timepicker-toggle>
+                <ngx-material-timepicker #toggleTimepicker></ngx-material-timepicker>
+            </div>
+            <div class="toggle-example">
+                <input [ngxTimepicker]="toggleTimepicker2" placeholder="enddate" [disableClick]="true" readonly  [(ngModel)]="EndTime">
+                <ngx-material-timepicker-toggle [for]="toggleTimepicker2"></ngx-material-timepicker-toggle>
+                <ngx-material-timepicker #toggleTimepicker2></ngx-material-timepicker>
+            </div>
+            <input type="text" class="form-control" placeholder="Task Description " name="task"
+              [(ngModel)]="addTaskValue">
+            <button class="btn btn-outline-success" type="button" (click)="addTask()">+</button>
+          </div>
+        </div>
+
+        <h4 class="text-primary mt-4">Tasks : </h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>startime</th>
+                    <th>End Time</th>
+                    <th>Minutes</th>
+                    <th>Description</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let task of taskArr">
+                    <td >{{task.task_name}}</td>
+                    <td>{{task.startTime}}</td>
+                    <td>{{task.endTime}}</td>
+                    <button class="btn btn-outline-primary col me-2" data-bs-toggle="modal" type="button"
+                  data-bs-target="#exampleModal" (click)="call(task)">e</button>
+                <div class="btn btn-outline-danger col" (click)="deleteTask(task)">X</div>
+                </tr>
+            </tbody>
+        </table>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Task</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="input-group p-4">
+                    <input [ngxTimepicker]="toggleTimepicker4" placeholder="startime" [disableClick]="true" readonly [(ngModel)]="editstartTime">
+                <ngx-material-timepicker-toggle [for]="toggleTimepicker4"></ngx-material-timepicker-toggle>
+                <ngx-material-timepicker #toggleTimepicker4></ngx-material-timepicker>
+                    <input [ngxTimepicker]="toggleTimepicker6" placeholder="enddate" [disableClick]="true" readonly  [(ngModel)]="editEndTime">
+                <ngx-material-timepicker-toggle [for]="toggleTimepicker6"></ngx-material-timepicker-toggle>
+                <ngx-material-timepicker #toggleTimepicker6></ngx-material-timepicker>
+                  <input type="text" class="form-control" placeholder="Enter task " name="task"
+                    [(ngModel)]="editTaskValue">
+                  <button class="btn btn-outline-success" type="button" data-bs-dismiss="modal"
+                    (click)="editTask()">Update</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col"></div>
+
     </div>
+
+  </div>
 </div>

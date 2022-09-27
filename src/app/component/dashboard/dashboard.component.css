@@ -1,3 +1,10 @@
 #tasks:hover {
     transform: scale(1.01);
 }
+.start{
+    z-index: -1;
+}
+time-picker {
+    position:absolute;
+    z-index : 99999999;
+  }
